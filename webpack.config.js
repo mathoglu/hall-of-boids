@@ -4,6 +4,7 @@ const path = require('path'),
       HtmlWebpackPlugin = require('html-webpack-plugin'),
       ExtractTextPlugin = require('extract-text-webpack-plugin'),
       ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin,
+      autoprefixer = require('autoprefixer'),
       srcPath = path.join(__dirname, 'src'),
       distPath = path.join(__dirname, 'dist');
 
@@ -38,12 +39,12 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: [path.resolve('src', 'app', 'components'), path.resolve('src', 'app', 'views')],
-        loader: ExtractTextPlugin.extract('style', 'css!sass')
+        loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
       },
       {
         test: /\.scss$/,
         include: [path.resolve('src', 'app', 'components'), path.resolve('src', 'app', 'views')],
-        loader: 'raw!sass'
+        loaders: ['raw', 'postcss', 'sass']
       },
       {
         test: /\.html$/,
@@ -93,7 +94,8 @@ module.exports = {
     module: false,
     clearImmediate: false,
     setImmediate: false
-  }
+  },
+  postcss: [autoprefixer({ browsers: ['last 2 versions'] })]
 };
 
 
