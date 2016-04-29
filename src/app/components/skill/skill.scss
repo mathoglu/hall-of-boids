@@ -1,0 +1,72 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.skill-wrapper {
+  text-align: center;
+
+  .skill-title {
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    width: 100%;
+  }
+
+  $pie-size: 70px;
+  $class: skill-pie !default
+
+  @for $i from 1 through 10 {
+
+    $turn: $i/20;
+    $percent: 50 + $turn*100;
+
+    .#{$class}-#{$percent} {
+      display: inline-block;
+      position: relative;
+      width: $pie-size;
+      height: $pie-size;
+      line-height: 100px;
+      border-radius: 50%;
+      background-color: $nl-gray;
+      background-image:
+        linear-gradient(to right, transparent 50%, $nl-yellow 0);
+      color: transparent;
+      text-align: center;
+      @include box-depth(1);
+
+      &::after {
+        content: '#{$percent}%';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: $nl-purple;
+        opacity: 0;
+        transform: translate(-50%,-50%);
+        animation: fade-in 500ms ease-in-out;
+        animation-delay: 100ms;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+      }
+
+      &::before,  {
+        content: '';
+        position: absolute;
+        top: 0; left: 50%;
+        width: 50%; height: 100%;
+        border-radius: 0 100% 100% 0 / 50%;
+        background-color: $nl-yellow;
+        transform-origin: left;
+        animation: spin-#{$i} 500ms ease-in-out;
+        animation-delay: 100ms;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+      }
+    }
+
+    @keyframes spin-#{$i} {
+      to { transform: rotate(#{$turn}turn); }
+    }
+
+    @keyframes fade-in {
+      to { opacity: 1; }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="column small-12">
+    <span class="navigation-container" *ngIf="card">
+      <span class="navigation back" (click)="back()">back</span>
+      <span *ngIf="nav" class="navigation prev" (click)="nav.prev ? prev() : false" [ngClass]="{disabled: !nav.prev}">
+        Prev
+      </span>
+      <span *ngIf="nav" class="navigation next" (click)="nav.next ? next() : false" [ngClass]="{disabled: !nav.next}">
+        Next
+      </span>
+    </span>
+    <card [data]="card" *ngIf="!loading && card"></card>
+    <span style="position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);" *ngIf="loading">
+      <div class="loader"></div>
+    </span>
+    <span class="not-found" *ngIf="!loading && !card">
+      No card found? <a class="link" [routerLink]="['Overview']">&larr;Back to overview</a>
+    </span>
+  </div>
+</div>

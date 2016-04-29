@@ -1,0 +1,113 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.mini-card {
+  position: relative;
+  width: 12rem;
+  margin: 0 1rem;
+  display: inline-block;
+
+  $transition-toggle: 500ms ease-in-out;
+
+  .logo {
+    position: absolute;
+    top: -22px;
+    right: 2px;
+    width: 56px;
+    height: 13px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .card-wrapper {
+    background-color: white;
+    border: 0.5rem solid $nl-purple;
+    border-top: 2rem solid $nl-purple;
+    border-radius: 1rem;
+    padding: 0 1rem 1rem;
+    @include box-depth(3);
+  }
+
+  .info-container-parent-row {
+    margin: 0 -1rem;
+  }
+
+  $info-height: 18rem;
+  .info-container {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    position: relative;
+    //display: inline-block;
+    height: $info-height;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+
+    transition: height $transition-toggle;
+
+    &:hover {
+      .image-container {
+        &::after {
+          opacity: 0.6;
+          transition: opacity 300ms ease-in-out;
+        }
+      }
+    }
+
+    .info {
+      position: absolute;
+      bottom: 0;
+      display: inline-block;
+      background-color: white;
+      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.3rem;
+      z-index: 11;
+      height: 3.5rem;
+
+      transition: top $transition-toggle;
+
+      .title {
+        text-transform: capitalize;
+        font-style: italic;
+        font-size:0.7em;
+      }
+
+      h2 {
+        font-size: 1.2em;
+        margin: 0;
+        font-weight: bold;
+      }
+    }
+
+    .image-container {
+      display: inline-block;
+      right: -1px;
+      width: 100%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $nl-purple;
+        opacity: 0.3;
+        z-index: 10;
+
+        transition: opacity 300ms ease-in-out
+      }
+
+      .image {
+        width: 100%;
+        display: inline-block;
+        background-size: cover;
+        background-position: center;
+        vertical-align: bottom;
+      }
+    }
+  }
+}

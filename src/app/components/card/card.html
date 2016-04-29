@@ -1,0 +1,60 @@
+<div class="row card" [ngClass]="{active: active}">
+  <div class="columns large-centered large-6 medium-centered medium-8 small-12 card-wrapper">
+    <span class="logo" style="background-image: url(assets/images/EPS_RGB_WHITE_10.png);"></span>
+    <div class="row info-container-parent-row" (click)="toggle()">
+      <div class="info-container">
+        <div class="info">
+          <h2>{{ data.info.firstname + ' ' + data.info.lastname }}</h2>
+          <span class="title">{{ data.info.title }}</span>
+        </div>
+        <div class="image-container">
+          <img class="image" src="{{ data.image }}" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns small-12 skills-container">
+          <h3 class="heading">Skills</h3>
+          <div class="row">
+            <div class="column small-6 medium-3" *ngFor="#skill of getTop(4)">
+              <skill [content]="skill"></skill>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column small-12 more-container">
+              <span class="more-title">More</span>
+              <div class="more">
+                <span *ngFor="#skill of getRest()">{{ skill.name }}</span>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns small-12 project-container">
+        <div class="row">
+          <div class="columns small-12 container">
+            <h3 class="heading">Experiences</h3>
+            <div class="row" *ngFor="#project of data.projects">
+              <div class="column small-12 project">
+                <span class="project-title">{{ project.client }}</span>
+                <span class="project-duration">{{ project.duration.from }} - {{ project.duration.to }}</span>
+                <span class="project-description">{{ project.description }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="columns small-12 container">
+              <h3 class="heading">Personal</h3>
+              <div class="row">
+                <div class="column small-12 motto-container">
+                  <span class="motto"><q>{{ data.motto }}</q></span>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
