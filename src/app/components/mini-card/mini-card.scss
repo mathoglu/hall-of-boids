@@ -3,7 +3,7 @@
 
 .mini-card {
   position: relative;
-  width: 12rem;
+  width: 13rem;
   margin: 0 1rem;
   display: inline-block;
 
@@ -23,8 +23,9 @@
     background-color: white;
     border: 0.5rem solid $nl-purple;
     border-top: 2rem solid $nl-purple;
+    border-bottom: 0.6rem solid $nl-purple;
     border-radius: 1rem;
-    padding: 0 1rem 1rem;
+    padding: 0 1rem;
     @include box-depth(3);
   }
 
@@ -65,7 +66,9 @@
       transform: translateX(-50%);
       padding: 0.3rem;
       z-index: 11;
-      height: 3.5rem;
+      height: 5rem;
+      border-radius: 0 0 0.5rem 0.5rem;
+      border: 0.5rem solid white;
 
       transition: top $transition-toggle;
 
@@ -75,10 +78,42 @@
         font-size:0.7em;
       }
 
+      .name-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
       h2 {
         font-size: 1.2em;
         margin: 0;
         font-weight: bold;
+        position: relative;
+
+        $availability-size: 0.6rem;
+        &:before, &::before {
+          content: '';
+          margin-left: -1rem;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-25%);
+          width: $availability-size;
+          height: $availability-size;
+          border-radius: $availability-size/2;
+          background-color: $nl-red;
+          z-index: 11;
+          @include box-depth(1);
+
+          animation: pulse 2s ease-in-out;
+          animation-iteration-count: infinite;
+        }
+
+        @include pulsate(0.1);
+
+        &.available:before {
+          content: '';
+          background-color: $nl-green;
+        }
       }
     }
 

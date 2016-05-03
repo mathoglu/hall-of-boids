@@ -15,7 +15,7 @@
 
     .card-wrapper {
       max-height: 100rem;
-      height: auto; 
+      height: auto;
     }
 
     .more-container {
@@ -46,11 +46,13 @@
   }
 
   .card-wrapper {
+    cursor: pointer;
     background-color: white;
     border: 0.5rem solid $nl-purple;
     border-top: 2.3rem solid $nl-purple;
+    border-bottom: 0.8rem solid $nl-purple;
     border-radius: 1rem;
-    padding: 0 1rem 1rem;
+    padding: 0 1rem;
     margin-bottom: 1.4rem;
     @include box-depth(3);
 
@@ -107,6 +109,32 @@
         font-size: 2.1em;
         margin: 0;
         font-weight: bold;
+        position: relative;
+
+        $availability-size: 1rem;
+        &:before, &::before {
+          content: '';
+          margin-left: -1.5rem;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-25%);
+          width: $availability-size;
+          height: $availability-size;
+          border-radius: $availability-size/2;
+          background-color: $nl-red;
+          z-index: 11;
+          @include box-depth(1);
+
+          animation: pulse 2s ease-in-out;
+          animation-iteration-count: infinite;
+        }
+
+        @include pulsate(0.1);
+
+        &.available:before {
+          content: '';
+          background-color: $nl-green;
+        }
       }
     }
 
@@ -228,6 +256,11 @@
   .card {
 
     padding: 0 0.5rem;
+
+    .card-wrapper {
+      min-height: 47rem;
+      max-height: 50rem;
+    }
 
     .info-container {
       height: 27rem;

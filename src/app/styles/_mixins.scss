@@ -16,3 +16,11 @@
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   }
 }
+
+@mixin pulsate($depth: 0.4) {
+  @keyframes pulse {
+    0% { opacity: $depth; }
+    50% { opacity: 1; }
+    100% { opacity: $depth; }
+  }
+}

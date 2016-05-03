@@ -4,7 +4,7 @@
     <div class="row info-container-parent-row" (click)="toggle()">
       <div class="info-container">
         <div class="info">
-          <h2>{{ data.info.firstname + ' ' + data.info.lastname }}</h2>
+          <h2 [ngClass]="{available: data.available}">{{ data.info.firstname + ' ' + data.info.lastname }}</h2>
           <span class="title">{{ data.info.title }}</span>
         </div>
         <div class="image-container">
