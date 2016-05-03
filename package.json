@@ -5,15 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server -d",
+    "start": "node server.js",
     "postinstall": "typings install"
   },
   "author": "Matts Höglund",
   "license": "ISC",
   "dependencies": {
     "angular2": "2.0.0-beta.15",
+    "connect-history-api-fallback": "^1.2.0",
     "es6-shim": "^0.35.0",
+    "express": "^4.13.4",
     "webpack": "^1.13.0",
+    "webpack-hot-middleware": "^2.10.0",
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
@@ -37,6 +40,7 @@
     "typescript": "^1.8.10",
     "typings": "^0.7.12",
     "url-loader": "^0.5.7",
+    "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1"
   }
 }

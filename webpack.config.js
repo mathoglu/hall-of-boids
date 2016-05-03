@@ -18,7 +18,7 @@ module.exports = {
   entry: {
     polyfill: ['es6-shim/es6-shim.js', 'angular2/bundles/angular2-polyfills'],
     vendor: path.join(srcPath, 'lib', 'vendor.ts'),
-    main: path.join(srcPath, 'app', 'main.ts')
+    main: ['webpack/hot/dev-server', 'webpack-hot-middleware/client', path.join(srcPath, 'app', 'main.ts')]
   },
   output: {
     path: distPath,
@@ -71,6 +71,7 @@ module.exports = {
   },
   plugins: [
     new ForkCheckerPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true),
     new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
@@ -82,12 +83,6 @@ module.exports = {
       to: 'assets/images'
     }])
   ],
-  devServer: {
-    outputPath: distPath,
-    colors: true,
-    inline: true,
-    historyApiFallback: true
-  },
   node: {
     global: 'window',
     crypto: 'empty',
