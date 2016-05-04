@@ -8,8 +8,6 @@
 
 ## Run
 
+To fetch data you need to have the [API](https://github.com/mathoglu/hall-of-boids-api/) running side by side.
+
 `npm start`
-
-## Note
-
-Project contains no data, ask Mathoglu for data.
