@@ -1,46 +1,51 @@
 import {Injectable} from 'angular2/core';
+import {Http} from 'angular2/http';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CardService {
 
-  cards: any[];
+  cards: any[] = [];
   fetched: boolean = false;
+  url: string = 'http://localhost:3333/api/cards';
+
+  constructor(private _http: Http) {}
 
   _fetchCards(): Promise<any> {
-    return cardsPromise.then((cards)=> {
-      this.fetched = true;
-      this.cards = cards._data;
-      return this.cards;
-    });
+    return this._http.get(this.url)
+      .toPromise()
+      .then((res)=> {
+        const body = res.json();
+        this.fetched = true;
+        this.cards = body._data;
+        return body._data;
+      })
   }
 
   _fetchCard(id: number): Promise<any> {
-    let card = cards._data.filter( (a): boolean => { return parseInt(a.id) == id });
-    if(!card.length) return Promise.reject({message: 'Card not found'})
-    return Promise.resolve(card[0]);
+    return this._http.get(`${this.url}/${id}`)
+      .toPromise()
+      .then((res)=> {
+        const body = res.json();
+        this.fetched = true;
+        this.cards.push(body._data);
+        return body._data[0];
+      })
   }
 
-  _getFetched(id: number): boolean|Object {
-    let card = cards._data.filter( (c): boolean => { return parseInt(c.id) == id } );
-    if(!!card.length) return false;
-    return card[0];
+  _getFetched(id: number): Promise<any> {
+    return Promise.resolve(this.cards.filter( (c): boolean => { return parseInt(c.id) == id } )[0]);
   }
 
   list(): Promise<any>  {
-    if(!this.fetched) {
-      return this._fetchCards()
-    }
-    return cardsPromise;
+    return this._fetchCards()
   }
 
   get(id: number): Promise<any> {
-    let card = this._getFetched(id)
-    if(!card) {
-      return this._fetchCards().then(()=> {
-        return this.cards.filter( (c): boolean => { return parseInt(c.id) == id } )[0]
-      });
+    if(this.cards && this.cards.length) {
+      return this._getFetched(id)
     }
-    return Promise.resolve(card)
+    return this._fetchCard(id);
   }
 
   next(id: number): boolean {
@@ -51,6 +56,3 @@ export class CardService {
     return this.cards && id-1 > 0
   }
 }
-
-let cards = require('../cards.json'),
-    cardsPromise = Promise.resolve(cards);

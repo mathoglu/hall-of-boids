@@ -7,8 +7,7 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
     selector: 'overview-view',
     template: require('./overview.html'),
     //styles: [require('./overview.scss')],
-    directives: [MiniCardComponent, ROUTER_DIRECTIVES],
-    providers: [CardService]
+    directives: [MiniCardComponent, ROUTER_DIRECTIVES]
 })
 
 export class OverviewView {

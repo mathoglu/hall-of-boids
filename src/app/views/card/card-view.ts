@@ -7,8 +7,7 @@ import {CardService} from '../../services/card-service';
     selector: 'card-view',
     template: require('./card-view.html'),
     styles: [ require('./card-view.scss') ],
-    directives: [CardComponent, ROUTER_DIRECTIVES],
-    providers: [CardService]
+    directives: [CardComponent, ROUTER_DIRECTIVES]
 })
 
 export class CardView {
