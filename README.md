@@ -4,7 +4,6 @@
 
 - Node: [Download here](https://nodejs.org/en/download/)
 - Typings: `npm i -g typings`
-- Webpack and Webpack-dev-server: `npm i -g webpack webpack-dev-server`
 
 ## Run
 
