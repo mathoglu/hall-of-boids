@@ -36,5 +36,5 @@ app.use(webpackMiddleware(compiler ,{
 var server = app.listen(port, function () {
   var host = server.address().address;
 
-  console.log('Angular2Starter listening at http://%s:%s', host, port);
+  console.log('Hall of boids server listening at http://%s:%s', host, port);
 });
