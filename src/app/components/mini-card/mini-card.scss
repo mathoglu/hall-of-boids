@@ -114,6 +114,11 @@
           content: '';
           background-color: $nl-green;
         }
+
+        &.process:before {
+          content: '';
+          background-color: $nl-yellow;
+        }
       }
     }
 

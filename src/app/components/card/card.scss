@@ -135,6 +135,11 @@
           content: '';
           background-color: $nl-green;
         }
+
+        &.process:before {
+          content: '';
+          background-color: $nl-yellow;
+        }
       }
     }
 
@@ -231,6 +236,32 @@
       text-align: left;
       margin: 1rem 0;
 
+      $current-size: 0.5rem;
+      &.current {
+        .project-title {
+
+          &:before {
+            content: '';
+            display: inline-block;
+            line-height: 1em;
+            transform: translateY(-25%);
+            margin-right: 0.2rem;
+            width: $current-size;
+            height: $current-size;
+            border-radius: $current-size/2;
+            background-color: $nl-green;
+            z-index: 11;
+            @include box-depth(1);
+
+            animation: pulse 2s ease-in-out;
+            animation-iteration-count: infinite;
+          }
+        }
+
+      }
+
+      @include pulsate(0.1);
+
       .project-title, .project-duration {
         display: inline-block;
       }
@@ -255,6 +286,7 @@
 @media #{$small-only} {
   .card {
 
+    font-size: 0.7em;
     padding: 0 0.5rem;
 
     .card-wrapper {

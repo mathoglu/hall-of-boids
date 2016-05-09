@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, OnInit} from 'angular2/core';
 import {SkillComponent} from '../skill/skill';
 
 @Component({
@@ -13,6 +13,13 @@ export class CardComponent {
   @Input() data;
   active: boolean = false;
   topAmount: number;
+
+  ngOnInit(): void {
+    this.data.projects.forEach(function(p) {
+      p.duration.from = new Date(p.duration.from);
+      p.duration.to = new Date(p.duration.to);
+    })
+  }
 
   public getTop(nr: number): Array<any> {
     this.topAmount = nr;

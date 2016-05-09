@@ -27,7 +27,7 @@
       border-radius: 50%;
       background-color: $nl-gray;
       background-image:
-        linear-gradient(to right, transparent 50%, $nl-yellow 0);
+        linear-gradient(to right, transparent 50%, $nl-gold 0);
       color: transparent;
       text-align: center;
       @include box-depth(1);
@@ -52,7 +52,7 @@
         top: 0; left: 50%;
         width: 50%; height: 100%;
         border-radius: 0 100% 100% 0 / 50%;
-        background-color: $nl-yellow;
+        background-color: $nl-gold;
         transform-origin: left;
         animation: spin-#{$i} 500ms ease-in-out;
         animation-delay: 100ms;
