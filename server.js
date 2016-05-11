@@ -1,5 +1,6 @@
 const express = require('express'),
   path = require('path'),
+  morgan = require('morgan'),
   app = express(),
   port = process.env.port || 8080,
   http = require("http"),
@@ -10,6 +11,8 @@ app.use(history({
     { from: /\/widget\//, to: '/widget/index.html'}
   ]
 }));
+
+app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
