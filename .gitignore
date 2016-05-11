@@ -37,5 +37,5 @@ typings
 *.js
 *.js.map
 !*.config.js
-!server.js
+!*server.js
 dist
