@@ -13,10 +13,6 @@ const METADATA = {
   baseUrl: '/'
 };
 
-const GLOBALS = {
-  API_URL: 'http://localhost:3333'
-};
-
 const RawStylePaths = [
   path.resolve('src', 'app', 'components'),
   path.resolve('src', 'app', 'views'),
@@ -39,7 +35,10 @@ module.exports = {
   resolve: {
     extensions: ['', '.ts', '.js'],
     root: srcPath,
-    modulesDirectories: ['node_modules']
+    modulesDirectories: ['node_modules'],
+    alias: {
+      'app-config': path.join(__dirname, 'config.js')
+    }
   },
   devtool: 'source-map',
   module: {
@@ -97,7 +96,6 @@ module.exports = {
       chunksSortMode: packageSort(['polyfill','vendor','widget']),
       filename: 'widget/index.html'
     }),
-    new webpack.DefinePlugin(GLOBALS),
     new CopyWebpackPlugin([
       {
         from: path.join(srcPath, 'assets', 'images'),

@@ -1,20 +1,23 @@
 import {Injectable} from 'angular2/core';
-import {Http} from 'angular2/http';
+import {Http, Headers, RequestOptions} from 'angular2/http';
 import 'rxjs/add/operator/toPromise';
 
-declare var API_URL: string;
+let {API_URL} = require('app-config');
+
+let options = new RequestOptions({
+    headers: new Headers({ 'Content-Type': 'application/json' })
+  });
 
 @Injectable()
 export class CardService {
 
   cards: any[] = [];
   fetched: boolean = false;
-  url: string = `http://localhost:3333/api/cards`;
 
   constructor(private _http: Http) {}
 
   _fetchCards(): Promise<any> {
-    return this._http.get(this.url)
+    return this._http.get(`${API_URL}/api/cards`, options)
       .toPromise()
       .then((res)=> {
         const body = res.json();
@@ -29,7 +32,7 @@ export class CardService {
   }
 
   _fetchCard(id: number): Promise<any> {
-    return this._http.get(`${this.url}/${id}`)
+    return this._http.get(`${API_URL}/api/cards/${id}`, options)
       .toPromise()
       .then((res)=> {
         const body = res.json();
