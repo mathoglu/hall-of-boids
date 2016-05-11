@@ -1,1 +1,1 @@
-web: node server.js
+web: ./node_modules/webpack/bin/webpack.js && node server.js
