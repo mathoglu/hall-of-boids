@@ -2,7 +2,7 @@ const express = require('express'),
   path = require('path'),
   morgan = require('morgan'),
   app = express(),
-  port = process.env.port || 8080,
+  port = process.env.PORT || 8080,
   http = require("http"),
   history = require('connect-history-api-fallback');
 
