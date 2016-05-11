@@ -13,12 +13,24 @@ const METADATA = {
   baseUrl: '/'
 };
 
+const GLOBALS = {
+  API_URL: 'http://localhost:3333'
+};
+
+const RawStylePaths = [
+  path.resolve('src', 'app', 'components'),
+  path.resolve('src', 'app', 'views'),
+  path.resolve('src', 'widget', 'views'),
+  path.resolve('src', 'widget', 'components')
+];
+
 module.exports = {
   metadata: METADATA,
   entry: {
     polyfill: ['es6-shim/es6-shim.js', 'angular2/bundles/angular2-polyfills'],
     vendor: path.join(srcPath, 'lib', 'vendor.ts'),
-    main: ['webpack/hot/dev-server', 'webpack-hot-middleware/client', path.join(srcPath, 'app', 'main.ts')]
+    main: ['webpack/hot/dev-server', 'webpack-hot-middleware/client', path.join(srcPath, 'app', 'main.ts')],
+    widget: path.join(srcPath, 'widget', 'main.ts')
   },
   output: {
     path: distPath,
@@ -39,12 +51,12 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        exclude: [path.resolve('src', 'app', 'components'), path.resolve('src', 'app', 'views')],
+        exclude: RawStylePaths,
         loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
       },
       {
         test: /\.scss$/,
-        include: [path.resolve('src', 'app', 'components'), path.resolve('src', 'app', 'views')],
+        include: RawStylePaths,
         loaders: ['raw', 'postcss', 'sass']
       },
       {
@@ -77,12 +89,26 @@ module.exports = {
     new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
       template: path.join(srcPath, 'app', 'index.html'),
+      excludeChunks: ['widget'],
       chunksSortMode: packageSort(['polyfill','vendor','main'])
     }),
-    new CopyWebpackPlugin([{
-      from: path.join(srcPath, 'assets', 'images'),
-      to: 'assets/images'
-    }])
+    new HtmlWebpackPlugin({
+      template: path.join(srcPath, 'widget', 'index.html'),
+      excludeChunks: ['main'],
+      chunksSortMode: packageSort(['polyfill','vendor','widget']),
+      filename: 'widget/index.html'
+    }),
+    new webpack.DefinePlugin(GLOBALS),
+    new CopyWebpackPlugin([
+      {
+        from: path.join(srcPath, 'assets', 'images'),
+        to: 'assets/images'
+      },
+      {
+        from: path.join(srcPath, 'assets', 'favicon.ico'),
+        to: 'assets'
+      }
+    ])
   ],
   node: {
     global: 'window',

@@ -1,7 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {CardComponent} from '../../components/card/card';
 import {RouteParams, Router, ROUTER_DIRECTIVES} from 'angular2/router';
-import {CardService} from '../../services/card-service';
+import {CardService} from '../../../common/services/card-service';
 
 @Component({
     selector: 'card-view',

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from 'angular2/core';
 import {MiniCardComponent} from '../../components/mini-card/mini-card';
-import {CardService} from '../../services/card-service';
+import {CardService} from '../../../common/services/card-service';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 @Component({

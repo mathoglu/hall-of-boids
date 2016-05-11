@@ -1,0 +1,30 @@
+<div class="widget-card" [ngClass]="{active: active}">
+  <div class="columns small-centered small-12 card-wrapper">
+    <span class="logo" style="background-image: url(../assets/images/EPS_RGB_WHITE_10.png);"></span>
+    <div class="row" (click)="toggle()">
+      <div class="image-container">
+        <span class="image" style="background-image:url(../{{ data.image }});"></span>
+      </div>
+      <div class="info-container">
+        <div class="info">
+          <h2 [ngClass]="{available: data.available, process: data.inProcess}">{{ data.info.firstname + ' ' + data.info.lastname }}</h2>
+          <span class="title">{{ data.info.title }}</span>
+          <div class="column small-12 project" [ngClass]="{current: project.current}" *ngFor="#project of getLastProject()">
+            <span class="project-title">{{ project.client }}</span>
+            <span class="project-duration">{{ project.duration.from | date: 'MMMM y' }} - {{ project.duration.to | date: 'MMMM y' }}</span>
+            <span class="project-description">{{ project.description }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns small-12 skills-container">
+          <div class="row">
+            <div class="column small-6 medium-3" *ngFor="#skill of getTop(4)">
+              <skill [content]="skill"></skill>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

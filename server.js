@@ -16,6 +16,9 @@ const express = require('express'),
 // };
 
 app.use(history({
+  rewrites: [
+    { from: /\/widget\//, to: '/widget/index.html'}
+  ]
 }));
 
 app.use(webpackHotMiddleware(compiler,{

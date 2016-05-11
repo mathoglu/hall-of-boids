@@ -5,8 +5,13 @@ $nl-yellow: #ffce00;
 $nl-red: #FF1200;
 $nl-green: #02D802;
 
+//measurements
+$golden-ratio: 1.61803398875;
+$card-width: 27rem;
+$card-height: $card-width * $golden-ratio;
+
 // Functions
-@import '../../../node_modules/foundation-sites/scss/foundation/functions';
+@import '../../node_modules/foundation-sites/scss/foundation/functions';
 
 // Media queries
 $small-breakpoint:  em-calc(640)  !default;

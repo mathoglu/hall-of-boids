@@ -1,5 +1,5 @@
-@import '../../styles/variables';
-@import '../../styles/mixins';
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .mini-card {
   position: relative;
@@ -8,6 +8,14 @@
   display: inline-block;
 
   $transition-toggle: 500ms ease-in-out;
+
+  &:hover {
+
+    .card-wrapper {
+      @include box-depth(5);
+      transition: box-shadow 300ms ease-in-out;
+    }
+  }
 
   .logo {
     position: absolute;
@@ -26,7 +34,9 @@
     border-bottom: 0.6rem solid $nl-purple;
     border-radius: 1rem;
     padding: 0 1rem;
-    @include box-depth(3);
+    @include box-depth(1);
+
+    transition: box-shadow 300ms ease-in-out;
   }
 
   .info-container-parent-row {
@@ -48,6 +58,7 @@
     transition: height $transition-toggle;
 
     &:hover {
+
       .image-container {
         &::after {
           opacity: 0.6;

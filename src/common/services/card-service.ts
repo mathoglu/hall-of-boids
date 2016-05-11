@@ -2,12 +2,14 @@ import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
 import 'rxjs/add/operator/toPromise';
 
+declare var API_URL: string;
+
 @Injectable()
 export class CardService {
 
   cards: any[] = [];
   fetched: boolean = false;
-  url: string = 'http://localhost:3333/api/cards';
+  url: string = `http://localhost:3333/api/cards`;
 
   constructor(private _http: Http) {}
 
@@ -22,13 +24,18 @@ export class CardService {
       })
   }
 
+  _isFetched(id): boolean {
+    return !!this.cards.filter( (c): boolean => { return parseInt(c.id) === id } ).length
+  }
+
   _fetchCard(id: number): Promise<any> {
     return this._http.get(`${this.url}/${id}`)
       .toPromise()
       .then((res)=> {
         const body = res.json();
+        if(!body._data.length) return;
         this.fetched = true;
-        this.cards.push(body._data);
+        this.cards.push(body._data[0]);
         return body._data[0];
       })
   }
@@ -42,7 +49,7 @@ export class CardService {
   }
 
   get(id: number): Promise<any> {
-    if(this.cards && this.cards.length) {
+    if(this._isFetched(id)) {
       return this._getFetched(id)
     }
     return this._fetchCard(id);
