@@ -24,9 +24,8 @@
   .card-wrapper {
     cursor: pointer;
     background-color: white;
-    border: 0.2rem solid $nl-purple;
+    border: 0.5rem solid $nl-purple;
     border-top: 1.4rem solid $nl-purple;
-    border-bottom: 0.4rem solid $nl-purple;
     border-radius: 1rem;
     padding: 0;
     margin-bottom: 1.4rem;
@@ -39,6 +38,7 @@
   .image-container {
     display: inline-block;
     position: relative;
+    overflow: hidden;
     width: 100%;
     height: $image-height;
 
@@ -57,11 +57,11 @@
     }
 
     .image {
-      width: $card-width-widget - 1.3rem;
+      width: $card-width-widget - 1.9rem;
       height: $image-height;
       display: inline-block;
       background-size: cover;
-      background-position: 0,50%;
+      background-position-y: 30%;
       vertical-align: bottom;
     }
   }
@@ -91,7 +91,7 @@
       width: 100%;
       padding: 0.3rem;
       z-index: 11;
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.4rem;
 
       .title {
         text-transform: capitalize;
@@ -176,10 +176,6 @@
   .skills-container {
     margin: 0;
     font-size: 1.6em;
-
-    > .row > .column {
-      padding: 0;
-    }
   }
 
   .more-container {
