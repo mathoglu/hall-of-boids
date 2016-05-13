@@ -4,13 +4,13 @@
 .widget-card {
   position: relative;
   overflow: hidden;
-  width: $card-width;
-  height: $card-height;
+  width: $card-width-widget;
+  height: $card-height-widget;
   display: inline-block;
   margin: 0 1rem;
   font-size: 0.4em;
 
-  $image-height: $card-width/$golden-ratio;
+  $image-height: $card-width-widget/$golden-ratio;
 
   .logo {
     position: absolute;
@@ -58,7 +58,7 @@
     }
 
     .image {
-      width: $card-width - 1.1rem;
+      width: $card-width-widget - 1.1rem;
       height: $image-height;
       display: inline-block;
       background-size: cover;
