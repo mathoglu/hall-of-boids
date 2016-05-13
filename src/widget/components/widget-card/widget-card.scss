@@ -8,15 +8,16 @@
   height: $card-height;
   display: inline-block;
   margin: 0 1rem;
+  font-size: 0.4em;
 
   $image-height: $card-width/$golden-ratio;
 
   .logo {
     position: absolute;
-    top: -26px;
-    right: 2px;
-    width: 80px;
-    height: 19px;
+    top: -16px;
+    right: 9px;
+    width: 48px;
+    height: 11px;
     background-size: cover;
     background-position: center;
   }
@@ -24,9 +25,9 @@
   .card-wrapper {
     cursor: pointer;
     background-color: white;
-    border: 0.5rem solid $nl-purple;
-    border-top: 2.3rem solid $nl-purple;
-    border-bottom: 0.8rem solid $nl-purple;
+    border: 0.2rem solid $nl-purple;
+    border-top: 1.4rem solid $nl-purple;
+    border-bottom: 0.4rem solid $nl-purple;
     border-radius: 1rem;
     padding: 0;
     margin-bottom: 1.4rem;
@@ -45,7 +46,7 @@
     &::after {
       content: '';
       position: absolute;
-      top: 0;
+      top: -1px;
       left: 0;
       width: 100%;
       height: 100%;
@@ -57,11 +58,11 @@
     }
 
     .image {
-      width: $card-width - 2.3rem;
+      width: $card-width - 1.1rem;
       height: $image-height;
       display: inline-block;
       background-size: cover;
-      background-position: top;
+      background-position: 0,50%;
       vertical-align: bottom;
     }
   }
@@ -103,10 +104,10 @@
         font-weight: bold;
         position: relative;
 
-        $availability-size: 1rem;
+        $availability-size: 0.6rem;
         &:before, &::before {
           content: '';
-          margin-left: -1.5rem;
+          margin-left: -0.9rem;
           position: absolute;
           top: 50%;
           transform: translateY(-25%);
@@ -137,7 +138,7 @@
       .project {
 
         text-align: center;
-        margin: 1.5rem 0;
+        margin: 0.5rem 0;
 
         // $current-size: 0.5rem;
         // &.current {
@@ -171,16 +172,18 @@
 
         .project-title {
           font-weight: bold;
+          font-size: 0.7em;
         }
 
         .project-duration {
           font-style: italic;
           font-weight: normal;
-          font-size: 0.7em;
+          font-size: 0.5em;
         }
 
         .project-description {
           display: block;
+          font-size: 0.3em;
         }
       }
     }
@@ -197,6 +200,10 @@
 
   .skills-container {
     margin: 0;
+
+    > .row > .column {
+      padding: 0;
+    }
   }
 
   .more-container {
@@ -223,18 +230,4 @@
 }
 
 @media #{$small-only} {
-  .widget-card {
-
-    font-size: 0.7em;
-    padding: 0 0.5rem;
-
-    .card-wrapper {
-      min-height: 47rem;
-      max-height: 50rem;
-    }
-
-    .info-container {
-      height: 27rem;
-    }
-  }
 }

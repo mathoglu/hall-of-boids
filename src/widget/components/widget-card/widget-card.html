@@ -12,7 +12,7 @@
           <div class="column small-12 project" [ngClass]="{current: project.current}" *ngFor="#project of getLastProject()">
             <span class="project-title">{{ project.client }}</span>
             <span class="project-duration">{{ project.duration.from | date: 'MMMM y' }} - {{ project.duration.to | date: 'MMMM y' }}</span>
-            <span class="project-description">{{ project.description }}</span>
+            <!-- <span class="project-description">{{ project.description }}</span> -->
           </div>
         </div>
       </div>
@@ -20,8 +20,8 @@
     <div class="row">
       <div class="columns small-12 skills-container">
           <div class="row">
-            <div class="column small-6 medium-3" *ngFor="#skill of getTop(4)">
-              <skill [content]="skill"></skill>
+            <div class="column small-3" *ngFor="#skill of getTop(4)">
+              <skill [content]="skill" size="small"></skill>
             </div>
           </div>
       </div>

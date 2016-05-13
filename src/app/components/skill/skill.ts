@@ -8,4 +8,5 @@ import {Component, Input} from 'angular2/core';
 
 export class SkillComponent {
   @Input() content;
+  @Input() size;
 }

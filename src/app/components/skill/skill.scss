@@ -1,6 +1,31 @@
 @import '../../../styles/variables';
 @import '../../../styles/mixins';
 
+$pie-size-small: 40px;
+$pie-size-medium: 70px;
+$pie-size-large: 100px;
+
+.small {
+  .skill-pie {
+    width: $pie-size-small !important;
+    height: $pie-size-small !important;
+  }
+}
+
+.medium {
+  .skill-pie {
+    width: $pie-size-medium !important;
+    height: $pie-size-medium !important;
+  }
+}
+
+.large {
+  .skill-pie {
+    width: $pie-size-large !important;
+    height: $pie-size-large !important;
+  }
+}
+
 .skill-wrapper {
   text-align: center;
 
@@ -9,51 +34,57 @@
     display: inline-block;
     width: 100%;
   }
+  .skill-pie {
+    display: inline-block;
+    position: relative;
+    width: $pie-size-medium;
+    height: $pie-size-medium;
+    line-height: 100px;
+    border-radius: 50%;
+    background-color: $nl-gray;
+    background-image:
+      linear-gradient(to right, transparent 50%, $nl-gold 0);
+    color: transparent;
+    text-align: center;
+    @include box-depth(1);
 
-  $pie-size: 70px;
-  $class: skill-pie !default
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      color: $nl-purple;
+      opacity: 0;
+      transform: translate(-50%,-50%);
+      animation: fade-in 500ms ease-in-out;
+      animation-delay: 100ms;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+    }
 
+    &::before,  {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      width: 50%; height: 100%;
+      border-radius: 0 100% 100% 0 / 50%;
+      background-color: $nl-gold;
+      transform-origin: left;
+    }
+  }
+
+  $class: rating !default
   @for $i from 1 through 10 {
 
     $turn: $i/20;
     $percent: 50 + $turn*100;
 
     .#{$class}-#{$percent} {
-      display: inline-block;
-      position: relative;
-      width: $pie-size;
-      height: $pie-size;
-      line-height: 100px;
-      border-radius: 50%;
-      background-color: $nl-gray;
-      background-image:
-        linear-gradient(to right, transparent 50%, $nl-gold 0);
-      color: transparent;
-      text-align: center;
-      @include box-depth(1);
 
       &::after {
         content: '#{$percent}%';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        color: $nl-purple;
-        opacity: 0;
-        transform: translate(-50%,-50%);
-        animation: fade-in 500ms ease-in-out;
-        animation-delay: 100ms;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
       }
 
       &::before,  {
-        content: '';
-        position: absolute;
-        top: 0; left: 50%;
-        width: 50%; height: 100%;
-        border-radius: 0 100% 100% 0 / 50%;
-        background-color: $nl-gold;
-        transform-origin: left;
         animation: spin-#{$i} 500ms ease-in-out;
         animation-delay: 100ms;
         animation-iteration-count: 1;
