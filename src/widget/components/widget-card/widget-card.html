@@ -8,7 +8,7 @@
       <div class="info-container">
         <div class="info">
           <h2 [ngClass]="{available: data.available, process: data.inProcess}">{{ data.info.firstname + ' ' + data.info.lastname }}</h2>
-          <span class="title">{{ data.info.title }} @ {{ getLastProject().client }}</span>
+          <span class="title">{{ data.info.title }} <span *ngIf="getLastProject()">@ {{ getLastProject().client }}</span></span>
         </div>
       </div>
     </div>
