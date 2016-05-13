@@ -11,6 +11,10 @@ body {
   background-color: $nl-gray;
   color: $nl-purple;
   -webkit-overflow-scrolling: touch;
+
+  &.widget {
+    background: transparent;
+  }
 }
 
 a.link {
