@@ -5,7 +5,7 @@ import {CarouselView} from './views/carousel/carousel.view';
 
 @Component({
   selector: 'widget-app',
-  template: `<div class="column small-12"><router-outlet></router-outlet></div>`,
+  template: `<div style="margin-left: auto; margin-right: auto;"><router-outlet></router-outlet></div>`,
   directives: [RouterOutlet],
   providers: [CardService]
 })

@@ -11,7 +11,6 @@ import {SkillComponent} from '../../../app/components/skill/skill';
 export class WidgetCardComponent implements OnInit {
 
   @Input() data;
-  active: boolean = false;
   topAmount: number;
 
   ngOnInit(): void {
@@ -31,10 +30,6 @@ export class WidgetCardComponent implements OnInit {
   }
 
   public getLastProject(): Array<any> {
-    return this.data.projects.slice(0, 1);
-  }
-
-  public toggle(e: Event): void {
-    this.active = !this.active;
+    return this.data.projects[0];
   }
 }

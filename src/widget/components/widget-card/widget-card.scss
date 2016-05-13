@@ -7,7 +7,6 @@
   width: $card-width-widget;
   height: $card-height-widget;
   display: inline-block;
-  margin: 0 1rem;
   font-size: 0.4em;
 
   $image-height: $card-width-widget/$golden-ratio;
@@ -58,7 +57,7 @@
     }
 
     .image {
-      width: $card-width-widget - 1.1rem;
+      width: $card-width-widget - 1.3rem;
       height: $image-height;
       display: inline-block;
       background-size: cover;
@@ -92,14 +91,16 @@
       width: 100%;
       padding: 0.3rem;
       z-index: 11;
+      margin-bottom: 1rem;
 
       .title {
         text-transform: capitalize;
         font-style: italic;
+        font-size: 1.7em;
       }
 
       h2 {
-        font-size: 2.1em;
+        font-size: 2.5em;
         margin: 0;
         font-weight: bold;
         position: relative;
@@ -138,33 +139,7 @@
       .project {
 
         text-align: center;
-        margin: 0.5rem 0;
-
-        // $current-size: 0.5rem;
-        // &.current {
-        //   .project-title {
-        //
-        //     &:before {
-        //       content: '';
-        //       display: inline-block;
-        //       line-height: 1em;
-        //       transform: translateY(-25%);
-        //       margin-right: 0.2rem;
-        //       width: $current-size;
-        //       height: $current-size;
-        //       border-radius: $current-size/2;
-        //       background-color: $nl-green;
-        //       z-index: 11;
-        //       @include box-depth(1);
-        //
-        //       animation: pulse 2s ease-in-out;
-        //       animation-iteration-count: infinite;
-        //     }
-        //   }
-        //
-        // }
-        //
-        // @include pulsate(0.1);
+        margin:0;
 
         .project-title, .project-duration {
           display: inline-block;
@@ -200,6 +175,7 @@
 
   .skills-container {
     margin: 0;
+    font-size: 1.6em;
 
     > .row > .column {
       padding: 0;
