@@ -3,6 +3,6 @@ import {WidgetApp} from './app';
 import {ROUTER_PROVIDERS} from 'angular2/router';
 import { HTTP_PROVIDERS } from "angular2/http";
 import '../styles/main.scss';
-import '../assets/images/EPS_RGB_WHITE_10.png'
+import '../assets/images/nl-logo.png'
 
 bootstrap(WidgetApp, [ROUTER_PROVIDERS, HTTP_PROVIDERS]);
