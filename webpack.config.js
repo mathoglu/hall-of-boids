@@ -24,7 +24,6 @@ module.exports = {
   metadata: METADATA,
   entry: {
     polyfill: ['es6-shim/es6-shim.js', 'angular2/bundles/angular2-polyfills'],
-    vendor: path.join(srcPath, 'lib', 'vendor.ts'),
     main: path.join(srcPath, 'app', 'main.ts'),
     widget: path.join(srcPath, 'widget', 'main.ts')
   },
@@ -88,12 +87,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(srcPath, 'app', 'index.html'),
       excludeChunks: ['widget'],
-      chunksSortMode: packageSort(['polyfill','vendor','main'])
+      chunksSortMode: packageSort(['polyfill','main'])
     }),
     new HtmlWebpackPlugin({
       template: path.join(srcPath, 'widget', 'index.html'),
       excludeChunks: ['main'],
-      chunksSortMode: packageSort(['polyfill','vendor','widget']),
+      chunksSortMode: packageSort(['polyfill','widget']),
       filename: 'widget/index.html'
     }),
     new CopyWebpackPlugin([
@@ -120,7 +119,6 @@ module.exports = {
 
 
 function packageSort(packages) {
-  // packages = ['polyfills', 'vendor', 'app']
   var len = packages.length - 1;
   var first = packages[0];
   var last = packages[len];
@@ -133,7 +131,7 @@ function packageSort(packages) {
     if (a.names[0] === last) {
       return 1;
     }
-    // vendor before app
+    
     if (a.names[0] !== first && b.names[0] === last) {
       return -1;
     } else {

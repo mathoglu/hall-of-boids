@@ -1,5 +1,5 @@
 <div class="column smal-12 cards-container">
-  <mini-card [data]="card" *ngFor="#card of cards"></mini-card>
+  <mini-card [data]="card" *ngFor="let card of cards"></mini-card>
   <span style="position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);" *ngIf="loading">
     <div class="loader"></div>
   </span>
