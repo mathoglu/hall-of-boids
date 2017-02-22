@@ -1,11 +1,10 @@
-import {Component, Input, OnInit} from 'angular2/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SkillComponent} from '../../../app/components/skill/skill';
 
 @Component({
     selector: 'widget-card',
     template: require('./widget-card.html'),
-    styles: [require('./widget-card.scss')],
-    directives: [SkillComponent]
+    styles: [require('./widget-card.scss')]
 })
 
 export class WidgetCardComponent implements OnInit {

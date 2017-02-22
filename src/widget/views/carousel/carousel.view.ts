@@ -1,13 +1,12 @@
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {WidgetCardComponent} from '../../components/widget-card/widget-card';
-import {RouteParams, Router, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import {CardService} from '../../../common/services/card-service';
 
 @Component({
     selector: 'carousel-view',
     template: require('./carousel.view.html'),
-    styles: [ require('./carousel.view.scss') ],
-    directives: [WidgetCardComponent, ROUTER_DIRECTIVES]
+    styles: [ require('./carousel.view.scss') ]
 })
 
 export class CarouselView implements OnInit {
@@ -18,7 +17,7 @@ export class CarouselView implements OnInit {
 
   constructor(
     private _cardService: CardService,
-    private _routeParams: RouteParams,
+    private _route: ActivatedRoute,
     private _router: Router
   ){}
 
@@ -29,19 +28,21 @@ export class CarouselView implements OnInit {
   }
 
   ngOnInit(): void {
-    let id = parseInt(this._routeParams.get('id'));
-    this.speed = parseInt(this._routeParams.get('speed')) || 30;
-    this._cardService.get(id).then(
-      (card)=> {
-        if(!card) {
-          this._router.navigate(['Carousel', { id: 1, speed: this.speed }])
-          return;
+    this._route.params.forEach((params: Params) => {
+      let id = +params['id'];
+      let speed = +params['speed'] || 30;
+      this._cardService.get(id).then(
+        (card)=> {
+          if(!card) {
+            this._router.navigate(['Carousel', { id: 1, speed: this.speed }])
+            return;
+          }
+          this.loading = false;
+          this.currentCard = card;
+          this._initTimeout(id);
         }
-        this.loading = false;
-        this.currentCard = card;
-        this._initTimeout(id);
-      }
-    )
+      )
+    });
   }
 
   ngOnDestroy(): void {

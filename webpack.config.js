@@ -3,10 +3,10 @@ const path = require('path'),
       CopyWebpackPlugin = require('copy-webpack-plugin'),
       HtmlWebpackPlugin = require('html-webpack-plugin'),
       ExtractTextPlugin = require('extract-text-webpack-plugin'),
-      ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin,
       autoprefixer = require('autoprefixer'),
       srcPath = path.join(__dirname, 'src'),
       distPath = path.join(__dirname, 'dist');
+      nodeModulesPath = path.join(__dirname, 'node_modules');
 
 const METADATA = {
   title: 'Testing',
@@ -23,7 +23,7 @@ const RawStylePaths = [
 module.exports = {
   metadata: METADATA,
   entry: {
-    polyfill: ['es6-shim/es6-shim.js', 'angular2/bundles/angular2-polyfills'],
+    polyfill: ['es6-shim/es6-shim.js'],
     main: path.join(srcPath, 'app', 'main.ts'),
     widget: path.join(srcPath, 'widget', 'main.ts')
   },
@@ -81,7 +81,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new ForkCheckerPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true),
     new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
@@ -103,7 +102,26 @@ module.exports = {
       {
         from: path.join(srcPath, 'assets', 'favicon.ico'),
         to: 'assets'
-      }
+      },
+      { from: path.join(nodeModulesPath, 'core-js', 'client', 'shim.min.js'),
+        to: 'public/scripts'
+      },
+
+      { from: path.join(nodeModulesPath, 'core-js', 'client', 'shim.min.js.map'),
+        to: 'public/scripts'
+      },
+      { from: path.join(nodeModulesPath, 'systemjs', 'dist', 'system.src.js'),
+        to: 'public/scripts'
+      },
+      // { from: path.join(nodeModulesPath, 'zone.js', 'dist', 'zone.js'),
+      //   to: 'public/scripts'
+      // },
+      { from: path.join(nodeModulesPath, 'reflect-metadata', 'Reflect.js'),
+        to: 'public/scripts'
+      },
+      { from: path.join(nodeModulesPath, 'reflect-metadata', 'Reflect.js.map'),
+        to: 'public/scripts'
+      },
     ])
   ],
   node: {
@@ -131,7 +149,7 @@ function packageSort(packages) {
     if (a.names[0] === last) {
       return 1;
     }
-    
+
     if (a.names[0] !== first && b.names[0] === last) {
       return -1;
     } else {

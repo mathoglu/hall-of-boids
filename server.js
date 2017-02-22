@@ -15,6 +15,7 @@ app.use(history({
 app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'public', 'scripts')));
 
 var server = app.listen(port, function () {
   var host = server.address().address;

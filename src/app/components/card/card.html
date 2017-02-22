@@ -8,7 +8,7 @@
           <span class="title">{{ data.info.title }}</span>
         </div>
         <div class="image-container">
-          <img class="image" src="{{ data.image }}" />
+          <img class="image" [src]="getSafeImage()" />
         </div>
       </div>
     </div>

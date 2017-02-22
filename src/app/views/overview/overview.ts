@@ -1,15 +1,11 @@
-import {Component, Input, OnInit} from 'angular2/core';
-import {MiniCardComponent} from '../../components/mini-card/mini-card';
+import {Component, Input, OnInit} from '@angular/core';
 import {CardService} from '../../../common/services/card-service';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 @Component({
     selector: 'overview-view',
     template: require('./overview.html'),
     //styles: [require('./overview.scss')],
-    directives: [MiniCardComponent, ROUTER_DIRECTIVES]
 })
-
 export class OverviewView {
   @Input() content;
   cards: any[];
