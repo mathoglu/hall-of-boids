@@ -19,15 +19,11 @@ export class CardDataService implements OnDestroy {
 
   cards: any[] = [];
   fetched: boolean = false;
-  private apiToken: string;
-  private apiTokenSubscription: Subscription;
 
-  constructor(private _http: Http/*, private _authenticationService: AuthenticationService*/) {
-    // this.apiTokenSubscription = this._authenticationService.apiToken$.subscribe(token => this.apiToken = token);
+  constructor(private _http: Http) {
   }
 
   ngOnDestroy() {
-    // this.apiTokenSubscription.unsubscribe();
   }
 
   createEmployee(employee: IEmployee): Promise<number> {

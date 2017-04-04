@@ -57,18 +57,5 @@ export class CardView {
         }
       )
     });
-    // let id = this.id = parseInt(this._routeParams.get('id'));
-    // this._cardService.get(id).then(
-    //   (card)=> {
-    //     this.loading = false;
-    //     this.nav.next = this._cardService.next(this.id);
-    //     this.nav.prev = this._cardService.prev(this.id);
-    //     this.card = card;
-    //   },
-    //   (error)=> {
-    //     this.loading = false;
-    //     console.log(error.message)
-    //   }
-    // )
   }
 }
