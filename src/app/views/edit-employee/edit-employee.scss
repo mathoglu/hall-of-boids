@@ -1,0 +1,89 @@
+@import '../../../styles/main.scss';
+
+ul.employee-selector {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+div.edit-employee {
+  div.employee-image-container {
+    width: 300px;
+    img {
+      display: block;
+      margin: auto;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+div.information-container {
+
+}
+
+div.project-row {
+  margin: 5px;
+}
+
+div.skill-row {
+  margin-top: 5px;
+}
+
+div.profile-heading {
+  font-weight: bold;
+  border-top: solid thin;
+  border-bottom: solid thin;
+  border-color: $nl-purple;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+button.save-button {
+  margin: 5px;
+}
+
+button.add-project-button {
+  margin: 5px;
+}
+
+button.delete-icon {
+  &:before {
+    content: '\2716';
+    color: #FFFFFF;
+    background-color: $nl-purple;
+    border-radius: 75%;
+  }
+}
+
+button.add-icon {
+  &:before {
+    //content: ' \2795';
+    content: '+';
+    align-content: center;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: $nl-purple;
+    border-radius: 75%;
+  }
+}
+
+button.nl-button {
+  &.operation-confirm-button {
+    &:before {
+      content: ' \2714';
+    }
+    background-color: #02D802;
+    color: transparent;
+    text-shadow: 0 0 0 white;
+  }
+  &.operation-cancel-button {
+    &:before {
+      content: ' \2716';
+    }
+    background-color: #FF1200;
+    color: transparent;
+    text-shadow: 0 0 0 white;
+  }
+}
+

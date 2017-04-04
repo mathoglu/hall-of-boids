@@ -11,7 +11,7 @@ export class MiniCardComponent  {
   @Input() data;
 
   constructor(
-    private router:Router,
+    private router: Router,
     private sanitizer: DomSanitizer){}
 
   public viewCard(): void {

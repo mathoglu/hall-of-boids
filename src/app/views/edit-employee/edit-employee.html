@@ -1,0 +1,91 @@
+<div *ngIf="!loading" class="edit-employee">
+  <div class="employee-input-container column">
+    <div class="employee-image-container row">
+      <img class="employee-image" [src]="safeEmployeeImage" />
+    </div>
+    <input type="file" (change)="imageChange($event)" placeholder="Upload image" accept="image/png">
+
+    <div class="row profile-heading">
+      <span>Information</span>
+    </div>
+
+    <div class="information-container">
+      <div class="row">
+        <div class="row">
+          First name
+          <input type="text" [(ngModel)]="employee.first_name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="row">
+          Last name
+          <input type="text" [(ngModel)]="employee.last_name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="row">
+          Title
+          <input type="text" [(ngModel)]="employee.title">
+        </div>
+      </div>
+      <div class="row">
+        <div class="row">
+          Motto
+          <input type="text" [(ngModel)]="employee.motto">
+        </div>
+      </div>
+    </div>
+
+    <div class="row profile-heading">
+      <span>Skills</span>
+    </div>
+
+    <div class="skills-container">
+      <div *ngFor="let skill of employeeSkills; let skillIdx = index;" class="row skill-row">
+        <input type="text" [(ngModel)]="skill.name">
+        <label>
+          <md-slider thumbLabel min="0" max="100" step="1" tickInterval="1" value="{{skill.rating}}"></md-slider>
+        </label>
+        <button *ngIf="deletingSkill !== skillIdx" type="button" class="nl-button delete-icon" (click)="deletingSkill = skillIdx"></button>
+        <label *ngIf="deletingSkill ===skillIdx">Delete?
+          <button type="button" class="nl-button operation-confirm-button" (click)="deleteSkill(skillIdx)"></button>
+          <button type="button" class="nl-button operation-cancel-button" (click)="deletingSkill = -1"></button>
+        </label>
+      </div>
+      <div class="add-skill-container">
+        <button type="button" class="nl-button add-icon" (click)="addSkill()"></button>
+      </div>
+    </div>
+    <div class="row profile-heading">
+      <span>Projects</span>
+    </div>
+    <div class="projects-container">
+      <div *ngFor="let project of employeeProjects; let projectIdx = index;" class="row project-row">
+        <label>Client
+          <input type="text" [(ngModel)]="project.client">
+        </label>
+        <label>Description
+          <input type="textarea" [(ngModel)]="project.description">
+        </label>
+        <label>From
+          <input type="date" [ngModel]="project.duration_from | date: 'y-MM-dd'" (ngModelChange)="projectStartDateChange(project, $event)" >
+        </label>
+        <label>To
+          <input type="date" [ngModel]="project.duration_to | date: 'y-MM-dd'" (ngModelChange)="projectEndDateChange(project, $event)" >
+        </label>
+        <button *ngIf="deletingProject !== projectIdx" type="button" class="nl-button delete-icon" (click)="deletingProject = projectIdx"></button>
+        <button *ngIf="deletingProject === projectIdx" type="button" class="nl-button confirm-delete" (click)="deleteProject(projectIdx)">Y</button>
+        <button *ngIf="deletingProject === projectIdx" type="button" class="nl-button cancel-delete" (click)="deletingProject = -1">N</button>
+      </div>
+    </div>
+    <div class="row">
+      <button type="button" class="nl-button add-icon" (click)="addProject()"></button>
+    </div>
+    <div class="row">
+      <button type="button" class="nl-button" (click)="print()">Print</button>
+    </div>
+    <div class="row">
+      <button type="button" class="nl-button save-button" (click)="save()">Save</button>
+    </div>
+  </div>
+</div>

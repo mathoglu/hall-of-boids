@@ -5,6 +5,26 @@
 @import '../../node_modules/foundation-sites/scss/foundation/components/grid';
 @import '../../node_modules/foundation-sites/scss/foundation/components/visibility';
 
+//@import '~@angular/material/core/theming/all-theme';
+//
+//@include mat-core();
+//
+//// Define the palettes for your theme using the Material Design palettes available in palette.scss
+//// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+//// hue.
+//$nl-app-primary: mat-palette($nl-purple);
+//$nl-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+//
+//// The warn palette is optional (defaults to red).
+//$nl-app-warn:    mat-palette($mat-red);
+//
+//// Create the theme object (a Sass map containing all of the palettes).
+//$nl-app-theme: mat-light-theme($nl-app-primary, $nl-app-accent, $nl-app-warn);
+//
+//// Include theme styles for core and each component used in your app.
+//// Alternatively, you can import and @include the theme mixins for each component
+//// that you are using.
+//@include angular-material-theme($nl-app-theme);
 
 body {
   font-family: 'texgyreadventor';
@@ -52,7 +72,15 @@ a.link {
     display: block;
     font-size:0.7em;
   }
+}
 
+button.nl-button {
+  font-family: 'texgyreadventor';
+  color: #FFFFFF;
+  background-color: $nl-purple;
+  border: 0px;
+  border-radius: 5px;
+  font-size: 1em;
 }
 
 @media #{$small-only} {

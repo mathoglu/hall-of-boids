@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { ViewsModule } from './views/views.module';
 import { routing } from './app.routing';
 
+import 'hammerjs';
+
 import { AppComponent }  from './app';
 
 

@@ -1,0 +1,22 @@
+<div>
+  <div *ngIf="!loading" class="employee-selector">
+    <ul class="employee-selector">
+      <nav *ngFor="let employee of employees">
+        <a [routerLink]="['/employee', employee.id]">
+          {{employee.first_name + ' ' + employee.last_name}}
+        </a>
+      </nav>
+    </ul>
+    <!--<span class="employee-selector expanded row" *ngFor="let employee of employees" (click)="navigateToEmployeeEdit(employee.id)">-->
+      <!--{{employee.first_name + ' ' + employee.last_name}}-->
+    <!--</span>-->
+    <!--<span>+</span>-->
+
+    <!--<a *ngFor="let employee of employees">{{employee.first_name + employee.last_name}}</a>-->
+    <!--<span class="employee-selector expanded row" *ngFor="let employee of employees" (click)="navigateToEmployeeEdit(employee.id)">-->
+      <!--{{employee.first_name + ' ' + employee.last_name}}-->
+    <!--</span>-->
+    <!--<span>+</span>-->
+  </div>
+  <router-outlet></router-outlet>
+</div>

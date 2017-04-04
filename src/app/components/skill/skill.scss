@@ -61,7 +61,7 @@ $pie-size-large: 100px;
       animation-fill-mode: forwards;
     }
 
-    &::before,  {
+    &::before {
       content: '';
       position: absolute;
       top: 0; left: 50%;
@@ -72,7 +72,7 @@ $pie-size-large: 100px;
     }
   }
 
-  $class: rating !default
+  $class: rating !default;
   @for $i from 1 through 10 {
 
     $turn: $i/20;
@@ -84,7 +84,7 @@ $pie-size-large: 100px;
         content: '#{$percent}%';
       }
 
-      &::before,  {
+      &::before {
         animation: spin-#{$i} 500ms ease-in-out;
         animation-delay: 100ms;
         animation-iteration-count: 1;

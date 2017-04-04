@@ -5,7 +5,7 @@ const path = require('path'),
       ExtractTextPlugin = require('extract-text-webpack-plugin'),
       autoprefixer = require('autoprefixer'),
       srcPath = path.join(__dirname, 'src'),
-      distPath = path.join(__dirname, 'dist');
+      distPath = path.join(__dirname, 'dist'),
       nodeModulesPath = path.join(__dirname, 'node_modules');
 
 const METADATA = {
@@ -18,6 +18,7 @@ const RawStylePaths = [
   path.resolve('src', 'app', 'views'),
   path.resolve('src', 'widget', 'views'),
   path.resolve('src', 'widget', 'components')
+  //path.resolve('src', 'node_modules', '@angular', 'material', 'core', 'theming', 'prebuilt')
 ];
 
 module.exports = {
