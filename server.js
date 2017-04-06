@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express'),
   path = require('path'),
   morgan = require('morgan'),
@@ -11,6 +12,18 @@ app.use(history({
     { from: /\/widget\//, to: '/widget/index.html'}
   ]
 }));
+
+app.use(function (req, res, next) {
+  const whitelist = process.env.whitelist.split(',');
+  const requestIp = req.ip.split(':').pop();
+  console.log(requestIp);
+  if (whitelist.includes(requestIp)) {
+    next();
+  }
+  else {
+    console.error('Request received from' + requestIp + ' which is not on whitelist');
+  }
+});
 
 app.use(morgan('dev'));
 

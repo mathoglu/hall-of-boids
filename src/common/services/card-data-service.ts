@@ -32,7 +32,7 @@ export class CardDataService implements OnDestroy {
       .toPromise()
       .then((res) => {
           const body = res.json();
-          return body._data.id;
+          return +body._data;
         });
   }
 
@@ -112,7 +112,7 @@ export class CardDataService implements OnDestroy {
       .toPromise()
       .then((res) => {
         const body = res.json();
-        return body._data.id;
+        return +body._data;
       })
   }
 
@@ -122,7 +122,7 @@ export class CardDataService implements OnDestroy {
       .toPromise()
       .then((res) => {
         const body = res.json();
-        return body._data.id;
+        return +body._data;
       })
   };
 

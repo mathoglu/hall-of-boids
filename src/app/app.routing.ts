@@ -10,6 +10,7 @@ const appRoutes = [
   {path: '', component: OverviewView, name: 'Overview'},
   {path: 'card/:id', component: CardView, name: 'Card'},
   {path: 'edit', component: EditView, name: 'Edit'},
+  {path: 'employee/new', component: EditEmployeeView, name: 'AddEmployee'},
   {path: 'employee/:id', component: EditEmployeeView, name: 'EditEmployee'}
 ];
 

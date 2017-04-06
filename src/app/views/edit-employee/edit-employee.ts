@@ -29,6 +29,7 @@ export class EditEmployeeView implements OnInit, OnDestroy {
 
   constructor(
     private _route: ActivatedRoute,
+    private _router: Router,
     private _location: Location,
     private _cardDataService: CardDataService,
     private sanitizer: DomSanitizer
@@ -37,25 +38,41 @@ export class EditEmployeeView implements OnInit, OnDestroy {
   ngOnInit() {
     this.paramsSub = this._route.params
       .subscribe((params: Params) => {
-        let id = +params['id'];
-        return this._cardDataService.getEmployee(id).then(employee => {
-          console.log(employee);
-          this.employee = employee as IEmployee;
-          this.loading = false;
-          this.safeEmployeeImage = this.getSafeImage(this.employee.image);
-        }).then(() => {
-          this._cardDataService.getEmployeeProjects(this.employee.id).then(projects => {
-            console.log("Projects loaded");
-            console.log(projects);
-            this.employeeProjects = projects;
+        if (params['id']) {
+          let id = +params['id'];
+          return this._cardDataService.getEmployee(id).then(employee => {
+            console.log(employee);
+            this.employee = employee as IEmployee;
+            this.loading = false;
+            this.safeEmployeeImage = this.getSafeImage(this.employee.image);
+          }).then(() => {
+            this._cardDataService.getEmployeeProjects(this.employee.id).then(projects => {
+              console.log("Projects loaded");
+              console.log(projects);
+              this.employeeProjects = projects;
+            });
+            this._cardDataService.getEmployeeSkills(this.employee.id).then(skills => {
+              console.log("Skills loaded");
+              console.log(skills);
+              this.employeeSkills = skills;
+            })
           });
-          this._cardDataService.getEmployeeSkills(this.employee.id).then(skills => {
-            console.log("Skills loaded");
-            console.log(skills);
-            this.employeeSkills = skills;
-          })
-        });
+        }
+        else {
+          // new employee
+          this.employee = <IEmployee>{
+            image: '',
+            first_name: '',
+            last_name: '',
+            title: '',
+            motto: ''
+          };
+          this.employeeProjects = [];
+          this.employeeSkills= [];
+          this.loading = false;
+        }
       });
+
   }
 
   ngOnDestroy() {
@@ -142,7 +159,45 @@ export class EditEmployeeView implements OnInit, OnDestroy {
     }
   }
 
+  saveNew() {
+    this._cardDataService.createEmployee(this.employee).then(id => {
+      console.log("Employee created");
+      console.log(id);
+      this.employee.id = id;
+      this.employeeSkills = this.employeeSkills.map(skill => {
+        skill.employee_id = id;
+        return skill;
+      });
+      this.employeeProjects = this.employeeProjects.map(project => {
+        project.employee_id = id;
+        return project;
+      });
+      Promise.all(
+        this.employeeSkills.map(skill => {
+          return this._cardDataService.createSkill(skill).then(skillId => {
+            let i = this.employeeSkills.findIndex(s => s.name === skill.name);
+            this.employeeSkills[i].id = skillId;
+          });
+        }))
+        .then(() => {
+          return Promise.all(this.employeeProjects.map(project => {
+            return this._cardDataService.createProject(project).then(projectId => {
+              let i = this.employeeProjects.findIndex(p => p.client === project.client && p.description === project.description);
+              this.employeeProjects[i].id = projectId;
+            });
+          }));
+        })
+        .then(()=> {
+          this._router.navigate(['/employee', id]);
+        })
+      });
+  }
+
   save() {
+    if (!this.employee.id) {
+      this.saveNew();
+      return;
+    }
     let skillsToAdd = this.employeeSkills.filter(skill => !('id' in skill));
     let projectsToAdd = this.employeeProjects.filter(project => !('id' in project));
     if (skillsToAdd.length > 0) {
