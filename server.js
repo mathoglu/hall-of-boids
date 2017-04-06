@@ -14,14 +14,19 @@ app.use(history({
 }));
 
 app.use(function (req, res, next) {
-  const whitelist = process.env.whitelist.split(',');
-  const requestIp = req.ip.split(':').pop();
-  console.log(requestIp);
-  if (whitelist.includes(requestIp)) {
-    next();
+  if (process.env.whitelist) {
+    const whitelist = process.env.whitelist.split(',');
+    const requestIp = req.ip.split(':').pop();
+    console.log(requestIp);
+    if (whitelist.includes(requestIp)) {
+      next();
+    }
+    else {
+      console.error('Request received from' + requestIp + ' which is not on whitelist');
+    }
   }
   else {
-    console.error('Request received from' + requestIp + ' which is not on whitelist');
+    next();
   }
 });
 
