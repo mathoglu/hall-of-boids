@@ -1,3 +1,3 @@
 module.exports = {
-  API_URL: 'https://hall-of-boids-api.herokuapp.com'
+  API_URL: 'https://hall-of-boids-api-test.herokuapp.com'
 }
