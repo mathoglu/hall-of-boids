@@ -14,6 +14,8 @@ app.use(history({
 }));
 
 const ipWhitelist = process.env.whitelist.split(',').filter(function (s) { return s && s.length === 0 });
+console.log("Whitelist:");
+console.log(ipWhitelist);
 
 app.use(function (req, res, next) {
   if (process.env.whitelist) {
@@ -23,7 +25,7 @@ app.use(function (req, res, next) {
       next();
     }
     else {
-      console.error('Request received from ' + requestIp + ' which is not on whitelist: ' + ipWhitelist);
+      console.error('Request received from ' + requestIp + ' which is not on whitelist: ' + ipWhitelist.toString());
     }
   }
   else {
