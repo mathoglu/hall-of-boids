@@ -20,8 +20,8 @@ console.log("Whitelist:");
 console.log(ipWhitelist);
 
 app.use(function (req, res, next) {
-  console.log(req);
   if (process.env.whitelist) {
+    console.log(req.header('x-forwarded-for'));
     const requestIp = req.ip.split(':').pop();
     console.log(requestIp);
     if (ipWhitelist.includes(requestIp)) {
