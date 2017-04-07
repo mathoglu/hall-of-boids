@@ -13,16 +13,11 @@ app.use(history({
   ]
 }));
 
-console.log("Process env:");
-console.log(process.env);
 const ipWhitelist = process.env.whitelist.split(',').filter(function (s) { return s || s.length === 0 });
-console.log("Whitelist:");
-console.log(ipWhitelist);
 
 app.use(function (req, res, next) {
   if (process.env.whitelist) {
-    console.log(req.header('x-forwarded-for'));
-    const requestIp = req.ip.split(':').pop();
+    const requestIp = req.header('x-forwarded-for');
     console.log(requestIp);
     if (ipWhitelist.includes(requestIp)) {
       next();
