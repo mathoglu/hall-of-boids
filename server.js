@@ -13,6 +13,8 @@ app.use(history({
   ]
 }));
 
+console.log("Process env:");
+console.log(process.env);
 const ipWhitelist = process.env.whitelist.split(',').filter(function (s) { return s && s.length === 0 });
 console.log("Whitelist:");
 console.log(ipWhitelist);
