@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {SkillComponent} from '../../../app/components/skill/skill';
+import { Component, Input, OnInit, Sanitizer } from '@angular/core';
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
     selector: 'widget-card',
@@ -11,6 +11,10 @@ export class WidgetCardComponent implements OnInit {
 
   @Input() data;
   topAmount: number;
+
+  constructor(
+    private _sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
     this.data.projects.forEach(function(p) {
@@ -30,5 +34,9 @@ export class WidgetCardComponent implements OnInit {
 
   public getLastProject(): Array<any> {
     return this.data.projects[0];
+  }
+
+  private getSafeImage() {
+    return this._sanitizer.bypassSecurityTrustUrl(this.data.image);
   }
 }

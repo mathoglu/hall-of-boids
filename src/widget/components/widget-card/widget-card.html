@@ -3,7 +3,8 @@
     <span class="logo" style="background-image: url(../assets/images/nl-logo.png);"></span>
     <div class="row">
       <div class="image-container">
-        <span class="image" style="background-image:url(../{{ data.image }});"></span>
+        <!--<span class="image" [style.background-image]="getSafeImage()"></span>-->
+        <img [src]="getSafeImage()"/>
       </div>
       <div class="info-container">
         <div class="info">
