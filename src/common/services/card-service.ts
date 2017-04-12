@@ -53,6 +53,14 @@ export class CardService {
         this.cards.push(body._data[0]);
         return body._data[0];
       })
+      .catch((err) => {
+        if (err.status === 404) {
+          return;
+        }
+        else {
+          console.error(err);
+        }
+      })
   }
 
   _getFetched(id: number): Promise<any> {
