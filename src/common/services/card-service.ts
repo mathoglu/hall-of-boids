@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, RequestOptions} from '@angular/http';
+import {Http, Headers, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 let {API_URL} = require('app-config');
@@ -13,6 +13,7 @@ export class CardService {
 
   cards: any[] = [];
   fetched: boolean = false;
+  ids: number[] = [];
 
   constructor(private _http: Http) {}
 
@@ -23,8 +24,19 @@ export class CardService {
         const body = res.json();
         this.fetched = true;
         this.cards = body._data;
+        this.ids = body._data.map((card) => card.id).sort((a, b) => a-b);
         return body._data;
       })
+  }
+
+  getNextCardId(id: number): number {
+    let idsGreaterThanId = this.ids.filter(n => n > id);
+    if (idsGreaterThanId.length > 0) {
+      return idsGreaterThanId[0];
+    }
+    else {
+      return this.ids[0];
+    }
   }
 
   _isFetched(id): boolean {
@@ -49,6 +61,23 @@ export class CardService {
 
   list(): Promise<any>  {
     return this._fetchCards()
+  }
+
+  _fetchIds(): Promise<number[]> {
+    let requestOptions = options;
+    options.search = new URLSearchParams();
+    options.search.set('onlyIds', 'true');
+    return this._http.get(`${API_URL}/api/cards/`, requestOptions)
+      .toPromise()
+      .then((res) => {
+        const body = res.json();
+        this.ids = body._data.sort((a, b) => a - b);
+        return body._data.sort((a,b) => a - b);
+      })
+  }
+
+  listIds(): Promise<number[]> {
+    return this._fetchIds();
   }
 
   get(id: number): Promise<any> {
