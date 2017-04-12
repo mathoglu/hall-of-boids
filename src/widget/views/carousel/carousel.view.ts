@@ -23,25 +23,28 @@ export class CarouselView implements OnInit {
 
   private _initTimeout(id): void {
     setTimeout(()=> {
-      this._router.navigate(['Carousel', { id: id+1, speed: this.speed }])
+      let nextId = this._cardService.getNextCardId(id);
+      this._router.navigate(['Carousel', { id: nextId, speed: this.speed }])
     }, this.speed*1000)
   }
 
   ngOnInit(): void {
     this._route.params.forEach((params: Params) => {
       let id = +params['id'];
-      let speed = +params['speed'] || 30;
-      this._cardService.get(id).then(
-        (card)=> {
-          if(!card) {
-            this._router.navigate(['Carousel', { id: 1, speed: this.speed }])
-            return;
+      this.speed = +params['speed'] || 30;
+      this._cardService._fetchIds().then((ids) => {
+        this._cardService.get(id).then(
+          (card)=> {
+            if(!card) {
+              this._router.navigate(['Carousel', { id: 1, speed: this.speed }])
+              return;
+            }
+            this.loading = false;
+            this.currentCard = card;
+            this._initTimeout(id);
           }
-          this.loading = false;
-          this.currentCard = card;
-          this._initTimeout(id);
-        }
-      )
+        )
+      })
     });
   }
 
